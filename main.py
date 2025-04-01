@@ -1,32 +1,34 @@
 from impl import enigma
 from parts import alphabet
 
-#settings
 '''
+MACHINE SETTINGS ->
+
+settings should be lowercase
 settings list follows:
 [
-    plugboard settings,
-	rotor1 (fastest) setting, initial position, values, notch,
-	rotor2 setting, initial position, values, notch,
-	rotor3 (slowest) setting, initial position, values, notch,
-	reflector values
+    plugboard	settings,
+	rotor1		setting, initial position, values, notch,	(fastest)
+	rotor2		setting, initial position, values, notch,
+	rotor3		setting, initial position, values, notch,	(slowest)
+	reflector 	values
 ]
 
-rer is whether the settings should reset for each input
+rer determines if settings should reset for each new input
 '''
 settings = [
-	'ab cd ef gh',
-	'a', 'a', 'EKMFLGDQVZNTOWYHXUSPAIBRCJ'.lower(), 'q',
-	'a', 'e', 'AJDKSIRUXBLHWTMCQGZNPYFVOE'.lower(), 'e',
-	'a', 'z', 'BDFHJLCPRTXVZNYEIWGAKMUSQO'.lower(), 'v',
-	'EJMZALYXVBWFCRQUONTSPIKHGD'.lower()
+	('ab cd ef gh',),
+	('a', 'a', 'ekmflgdqvzntowyhxuspaibrcj', 'q'),
+	('a', 'e', 'ajdksiruxblhwtmcqgznpyfvoe', 'e'),
+	('a', 'z', 'bdfhjlcprtxvznyeiwgakmusqo', 'v'),
+	('ejmzalyxvbwfcrquontspikhgd',),
 ]
 rer = True
 
 #io handling
 machine=enigma(settings)
 while True:
-	i, o=input(), ''
+	i, o=input('> '), ''
 	for j in i:
 		if j in alphabet:
 			o+=machine.run(j)

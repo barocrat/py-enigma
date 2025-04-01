@@ -3,14 +3,18 @@ alphabet='abcdefghijklmnopqrstuvwxyz'
 
 class enigma:
 	def __init__(self, settings):
-		self.plugboard=plugboard(settings[0])
-		self.rotor1=rotor(settings[1], settings[2], settings[3], settings[4])
-		self.rotor2=rotor(settings[5], settings[6], settings[7], settings[8])
-		self.rotor3=rotor(settings[9], settings[10], settings[11], settings[12])
-		self.reflector=reflector(settings[13])
+		#initialize the components
+		self.plugboard=plugboard(settings[0][0])
+		self.rotor1=rotor(settings[1][0], settings[1][1], settings[1][2], settings[1][3])
+		self.rotor2=rotor(settings[2][0], settings[2][1], settings[2][2], settings[2][3])
+		self.rotor3=rotor(settings[3][0], settings[3][1], settings[3][2], settings[3][3])
+		self.reflector=reflector(settings[4][0])
 	def run(self, char):
+		#initialization
 		u=char==char.upper()
 		char=char.lower()
+
+		#running char through machine
 		char=self.plugboard.run(char)
 		char=self.rotor1.runfw(char)
 		char=self.rotor2.runfw(char)
@@ -20,6 +24,8 @@ class enigma:
 		char=self.rotor2.runbw(char)
 		char=self.rotor1.runbw(char)
 		char=self.plugboard.run(char)
+
+		#return
 		if u:
 			return char.upper()
 		return char
