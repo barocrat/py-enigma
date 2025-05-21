@@ -31,7 +31,11 @@ class enigma:
 		return char
 	def rotate(self):
 		self.rotor1.rotate()
-		if self.rotor1.pos==self.rotor2.notch:
+		if self.rotor2.pos == self.rotor2.notch:
+			#double step
 			self.rotor2.rotate()
-			if self.rotor2.pos==self.rotor3.notch:
-				self.rotor3.rotate()
+			self.rotor3.rotate()
+		else:
+			#normal step
+			if self.rotor1.pos==self.rotor1.notch:
+				self.rotor2.rotate()
